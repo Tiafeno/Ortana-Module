@@ -20,21 +20,6 @@ class modOrtanaHelper {
     // Return the Hello
     return $result;
 	}
-	
-  public static function getClientsAjax() {
-    // Obtain a database connection
-    $db = JFactory::getDbo();
-    // Retrieve the shout
-    $query = $db->getQuery(true)
-                ->select($db->quoteName('client'))
-                ->from($db->quoteName('ortana_clients'));
-    // Prepare the query
-    $db->setQuery($query);
-    // Load the row.
-    $result = $db->loadResult();
-    // Return the Hello
-    return $result;
-  }
 
   /* @function getCategoriesAjax
   ** This function get all categories

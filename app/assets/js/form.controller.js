@@ -3,7 +3,7 @@ ortanaForm
   .factory('OFactory', ['$http', '$q', function( $http, $q) {
     return {
       getClients: function() {
-        return $http.get( 'index.php' , {
+        return $http.get( Opt.ajax_url , {
           params : {
             option: 'com_ajax',
             module: 'ortana',
@@ -13,7 +13,7 @@ ortanaForm
         });
       },
       getCategories: function() {
-        return $http.get( "index.php", {
+        return $http.get( Opt.ajax_url, {
           params: {
             option: 'com_ajax',
             module: 'ortana',
@@ -24,7 +24,7 @@ ortanaForm
       },
       formHttp: function( form ) {
         return $http({
-          url: "index.php",
+          url: Opt.ajax_url,
           method: "POST",
           headers: { 'Content-Type': undefined },
           data: form
