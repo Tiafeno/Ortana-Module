@@ -52,15 +52,19 @@ ortanaForm
       return articles = art_;
     };
   }])
-  .controller('OController', ['$scope', 'OFactory', 'OServices', function( $scope, OFactory, OServices) {
+  .controller('OController', ['$scope', 'OFactory', 'OServices', 
+  function( $scope, OFactory, OServices) {
     $scope.Categories = [];
     $scope.Articles = [];
     /* set Articles */
     var articles = [];
+    var group_title = (false == Opt.group_title) ? "Inscription" : Opt.group_title.trim();
     articles = _.union( Opt.OArticles );
     _.each(articles, function( article, key ) {
-      // TODO: group_title review
-      article.fields = _.find(Opt.OTarifs, function( tarif ) { return parseInt( tarif.ID) == parseInt( article.ID ); });
+      var _tar = _.find(Opt.OTarifs, function( tarif ) { 
+        return (parseInt( tarif.ID) == parseInt( article.ID ) && tarif.group_title == group_title);
+      });
+      article.fields =  _.omit( _tar, function( value, key, obj ) { return key == 'ID'; });
     });
     OServices.setArticlesFn( $scope.Articles = articles );
     console.log( $scope.Articles );

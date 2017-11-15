@@ -12,7 +12,10 @@ require_once dirname(__FILE__) . '/helper.php';
 
 $application = JFactory::getApplication();
 $currentPageUrl = JUri::getInstance(); 
+
 $catId = $params->get('catId', false);
+$group_title = $params->get('group_title', false);
+
 $tarifs = modOrtanaHelper::getTarifs( $catId );
 $articles = modOrtanaHelper::getArticles( $catId );
 
@@ -28,7 +31,8 @@ $document->addScriptOptions('mod_ortana', [
   'OCategoryId' => (int)$catId,
   'OTarifs' => $tarifs,
   'OArticles' => $articles,
-  'ajax_url' => $currentPageUrl->toString()
+  'ajax_url' => $currentPageUrl->toString(),
+  'group_title' => $group_title
 ]);
 
 /* underscorejs librarie */
