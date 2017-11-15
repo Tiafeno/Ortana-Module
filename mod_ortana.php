@@ -4,6 +4,7 @@
   Module URI: https//github.com/Tiafeno/mod_ortana
   Description: Module joomla, subscription
   Author: TIAFENO Finel
+  Author Mail: tiafenofnel@gmail.com
   Author URI: http://www.falicrea.com
 */
 defined('_JEXEC') or die;
