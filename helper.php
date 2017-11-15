@@ -43,30 +43,36 @@ class modOrtanaHelper {
 		$article = JTable::getInstance("content"); 
 		$id = JFactory::getApplication()->input->getInt('id');
 		//$article->load($id); // Get Article 
-		
 		$cat = JTable::getInstance('category');
 		$cat->load($id);
 		return $cat;
 		
-	}
+  }
+  
+  public static function getArticles( $catId ) {
+    $model = JModelLegacy::getInstance( 'Articles', 'ContentModel' );
+    $model->setState( 'filter.category_id', (int)$catId ); 
+    $articles = $model->getItems();
+    print_r( $articles );
+  }
 	
 	public static function getContentTarifs( $catId ) {
-    JLoader::register('FieldsHelper', JPATH_ADMINISTRATOR . '/components/com_fields/helpers/fields.php');
+    JLoader::register( 'FieldsHelper', JPATH_ADMINISTRATOR . '/components/com_fields/helpers/fields.php' );
     $results = [];
-		$model = JModelLegacy::getInstance('Articles', 'ContentModel');
-		$model->setState('filter.category_id', (int)$catId); // Set category ID here
+		$model = JModelLegacy::getInstance( 'Articles', 'ContentModel' );
+		$model->setState( 'filter.category_id', (int)$catId ); 
     $articles = $model->getItems();
     foreach ( $articles as $article ) {
       $articleFields = [];
-      $Fields = FieldsHelper::getFields('com_content.article', $article, true);
+      $Fields = FieldsHelper::getFields( 'com_content.article', $article, true );
       while (list(, $Field) = each($Fields)) {
-        $currentArticle = new stdClass();
-        $currentArticle->ID = $Field->id;
+        $currentArticle        = new stdClass();
+        $currentArticle->ID    = $Field->id;
         $currentArticle->title = $Field->title;
-        $currentArticle->slug = $Field->name; // rename
-        $currentArticle->group_title = $Field->group_title;
+        $currentArticle->slug  = $Field->name;
         $currentArticle->value = $Field->value;
-        $currentArticle->rawValue = $Field->rawvalue;
+        $currentArticle->group_title = $Field->group_title;
+        $currentArticle->rawValue    = $Field->rawvalue;
         array_push( $articleFields, $currentArticle );
       }
       array_push( $results, $articleFields );
