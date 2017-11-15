@@ -70,7 +70,6 @@ class modOrtanaHelper {
 		$model->setState( 'filter.category_id', (int)$catId ); 
     $articles = $model->getItems();
     foreach ( $articles as $article ) {
-      $articleFields = [];
       $Fields = FieldsHelper::getFields( 'com_content.article', $article, true );
       while (list(, $Field) = each($Fields)) {
         $currentArticle        = new stdClass();
@@ -79,10 +78,10 @@ class modOrtanaHelper {
         $currentArticle->slug  = $Field->name;
         $currentArticle->value = $Field->value;
         $currentArticle->group_title = $Field->group_title;
+        $currentArticle->group_id = $Field->group_id;
         $currentArticle->rawValue    = $Field->rawvalue;
-        array_push( $articleFields, $currentArticle );
+        array_push( $results, $currentArticle );
       }
-      array_push( $results, $articleFields );
     }
 
     return $results;

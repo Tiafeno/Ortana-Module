@@ -45,8 +45,8 @@ $document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/angular-materia
 $document->addStyleSheet( 'https://fonts.googleapis.com/icon?family=Material+Icons' );
 $document->addStyleSheet( JUri::base() . 'modules/mod_ortana/app/lib/angular-material/angular-material.css' );
 /* Application angulajs files */
-$document->addScript( JUri::base() . 'modules/mod_ortana/app/assets/js/form.js');
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/assets/js/route.js');
+$document->addScript( JUri::base() . 'modules/mod_ortana/app/assets/js/form.js');
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/assets/js/form.controller.js');
 
 require JModuleHelper::getLayoutPath( "mod_ortana" );
