@@ -9,13 +9,18 @@
 defined('_JEXEC') or die;
 require_once dirname(__FILE__) . '/helper.php';
 
+$application = JFactory::getApplication();
 $currentPageUrl = JUri::getInstance(); 
-$client = $params->get('client', '1');
-$catId = $params->get('catId');
-$tarifs = modOrtanaHelper::getContentTarifs( $catId );
+$catId = $params->get('catId', false);
+$tarifs = modOrtanaHelper::getTarifs( $catId );
 $articles = modOrtanaHelper::getArticles( $catId );
 
+if (false == $catId)
+  jError::raiseWarning(100, 'Veuillez configurer les paramètres du module mod_ortana - @Finel');
+
+/* Include native jquery libaries */
 JHtml::_('jquery.framework');
+
 $document = JFactory::getDocument();
 $document->addScriptOptions('mod_ortana', [
   'OAssets' => JUri::base() . 'modules/mod_ortana/app/assets/',
@@ -24,12 +29,17 @@ $document->addScriptOptions('mod_ortana', [
   'OArticles' => $articles,
   'ajax_url' => $currentPageUrl->toString()
 ]);
+
 /* underscorejs librarie */
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/underscore/underscore-min.js');
-/* angularjs librarie */
+/* Angularjs librarie */
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/angular/angular.js');
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/angular-route/angular-route.js');
-/* application */
+$document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/angular-animate/angular-animate.min.js');
+$document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/angular-messages/angular-messages.min.js');
+$document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/angular-aria/angular-aria.min.js');
+$document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/angular-sanitize/angular-sanitize.min.js');
+/* Application angulajs files */
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/assets/js/form.js');
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/assets/js/route.js');
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/assets/js/form.controller.js');

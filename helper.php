@@ -38,25 +38,32 @@ class modOrtanaHelper {
     $db->setQuery($query);
     return $db->loadObjectList();
   }
-	
-	public static function getTarifs() {
-		$article = JTable::getInstance("content"); 
-		$id = JFactory::getApplication()->input->getInt('id');
-		//$article->load($id); // Get Article 
-		$cat = JTable::getInstance('category');
-		$cat->load($id);
-		return $cat;
-		
-  }
   
   public static function getArticles( $catId ) {
+    if (false == $catId) return false;
+    $results = [];
     $model = JModelLegacy::getInstance( 'Articles', 'ContentModel' );
     $model->setState( 'filter.category_id', (int)$catId ); 
     $articles = $model->getItems();
-    print_r( $articles );
+    foreach ($articles as $article) {
+      $currentArticle     = new stdClass();
+      $currentArticle->ID = $article->id;
+      $currentArticle->title = $article->title;
+      $currentArticle->alias = $article->alias;
+      $currentArticle->catId = $article->catid;
+      $currentArticle->category_title = $article->category_title;
+      $currentArticle->category_alias = $article->category_alias;
+      $currentArticle->category_route = $article->category_route;
+      $currentArticle->images = $article->images;
+
+      array_push( $results, $currentArticle );
+    }
+
+    return $results;
   }
 	
-	public static function getContentTarifs( $catId ) {
+	public static function getTarifs( $catId ) {
+    if (false == $catId) return false;
     JLoader::register( 'FieldsHelper', JPATH_ADMINISTRATOR . '/components/com_fields/helpers/fields.php' );
     $results = [];
 		$model = JModelLegacy::getInstance( 'Articles', 'ContentModel' );
