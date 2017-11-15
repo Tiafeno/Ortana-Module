@@ -39,6 +39,10 @@ $document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/angular-animate
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/angular-messages/angular-messages.min.js');
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/angular-aria/angular-aria.min.js');
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/angular-sanitize/angular-sanitize.min.js');
+$document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/angular-material/angular-material.min.js');
+
+$document->addStyleSheet( 'https://fonts.googleapis.com/icon?family=Material+Icons' );
+$document->addStyleSheet( JUri::base() . 'modules/mod_ortana/app/lib/angular-material/angular-material.css' );
 /* Application angulajs files */
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/assets/js/form.js');
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/assets/js/route.js');
