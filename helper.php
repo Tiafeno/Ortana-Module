@@ -73,7 +73,7 @@ class modOrtanaHelper {
       $Fields = FieldsHelper::getFields( 'com_content.article', $article, true );
       while (list(, $Field) = each($Fields)) {
         $currentArticle        = new stdClass();
-        $currentArticle->ID    = $Field->id;
+        $currentArticle->field_id    = $Field->id;
         $currentArticle->title = $Field->title;
         $currentArticle->slug  = $Field->name;
         $currentArticle->value = $Field->value;
