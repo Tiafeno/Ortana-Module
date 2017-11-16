@@ -74,7 +74,7 @@ ortanaForm
         return parseInt(_art.ID) == article_id; 
       });
       this.field_price = _.find( this._articles.fields, function( _field ) {
-        return  _field.slug == price_slug;
+        return  _field.slug == FIELDS.price_slug;
       });
       return this.field_price.value;
     };

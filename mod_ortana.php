@@ -14,6 +14,7 @@ $application = JFactory::getApplication();
 $currentPageUrl = JUri::getInstance(); 
 
 $catId = $params->get('catId', false);
+$mailTo = $params->get('mail', false);
 $group_title = $params->get('group_title', false);
 
 $tarifs = modOrtanaHelper::getTarifs( $catId );

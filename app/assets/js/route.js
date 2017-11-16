@@ -12,7 +12,7 @@ var routeFormInjectable = angular.module('routeFormInjectable', [ 'ngMaterial'])
     /**
      * @desc Récuperer l'article selectionner et les stockers
      * @param void
-     * @return <Promise> Objet article disponibles
+     * @return <Promise> Objet
      */
     OServices.getChoosenArticleFn()
       .then(function successCallback( response ) {
@@ -40,6 +40,8 @@ var routeFormInjectable = angular.module('routeFormInjectable', [ 'ngMaterial'])
         scope: true,
         link: function(scope, element, attr) {
           var article_id = parseInt(attr.chooseArticle);
+          
+          /** @desc Selectionner une article dans le service */
           OServices.chooseArticleFn( article_id );
           element.bind('click', function(ev) {
             scope.$apply(function() {
