@@ -5,20 +5,23 @@ var routeFormInjectable = angular.module('routeFormInjectable', [ 'ngMaterial'])
   function( $scope, OServices ) {
     
   }])
-  /** Controller du formaulaire de contact */
+  /** Controller du formulaire de contact */
   .controller('FormCtrl', ['$scope', '$location', 'OServices', 'OFactory', 
   function( $scope, $location, OServices, OFactory ) {
     $scope.Articles = {};
     /**
-     * @desc Récuperer les articles disponible et les stockers
+     * @desc Récuperer l'article selectionner et les stockers
      * @param void
-     * @return <Promise> Tableaux des articles disponibles
+     * @return <Promise> Objet article disponibles
      */
-    OServices.getArticlesFn()
+    OServices.getChoosenArticleFn()
       .then(function successCallback( response ) {
         if ( ! _.isObject( response )) $location.path('/inscription');
         $scope.Articles = response;
-      }).catch(function() { console.warn('Error on get article'); });
+      }).catch(function() { 
+        console.warn('Error on get article');
+        $location.path('/inscription');
+      });
     
     /**
      * @function sendMail

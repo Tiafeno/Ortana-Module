@@ -57,7 +57,7 @@ ortanaForm
       });
     };
     self.getChoosenArticleFn = function() {
-      return new Promese(function(resolve, reject) {
+      return new Promise(function(resolve, reject) {
         if (_.isNull(selectedArticle)) reject('Error: There are no items to select');
         resolve( selectedArticle );
       });
