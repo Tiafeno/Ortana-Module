@@ -2,15 +2,13 @@
 <extension type="module" version="3.0" client="site" method="upgrade">
     <name>Ortana subscription</name>
     <author>Tiafeno Finel</author>
-    <version>1.1.4</version>
+    <version>1.1.6</version>
     <description></description>
     <files>
         <filename>mod_ortana.xml</filename>
         <filename module="mod_ortana">mod_ortana.php</filename>
         <filename>index.html</filename>
         <filename>helper.php</filename>
-        <filename>tmpl/default.php</filename>
-        <filename>tmpl/index.html</filename>
     </files>
     <folders>
       <folder>sql</folder>
@@ -33,32 +31,12 @@
     <config>
       <fields name="params">
         <fieldset name="basic">
-          <field 
-            name="group_title" 
-            type="text" 
-            default="" 
-            label="Entrer le nom du groupe de champ" 
-            description="Nom du groupe de champ" 
-            filter="raw" />
-          <field 
-            name="mail" 
-            type="text" 
-            default="" 
-            label="Entrer l'adresse E-mail" 
-            description="Entrer l'adresse E-mail" 
-            filter="raw" />
-          <field 
-            name="catId" 
-            type="category" 
-            extension="com_content" 
-            label="Select a category" 
-            description="" />
           <field
-            name="client"
+            name="title"
             type="sql"
             default="1"
-            label="Select a client"
-            query="SELECT contact AS value, client FROM ortana_clients" />
+            label="Select a article"
+            query="SELECT id AS value, title FROM #__ortana_articles" />
         </fieldset>
       </fields>
     </config>

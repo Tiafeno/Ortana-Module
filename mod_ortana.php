@@ -11,30 +11,16 @@ defined('_JEXEC') or die;
 require_once dirname(__FILE__) . '/helper.php';
 
 $application = JFactory::getApplication();
-$currentPageUrl = JUri::getInstance(); 
-
-$catId = $params->get('catId', false);
-$mailTo = $params->get('mail', false);
+$PageUrl = JUri::getInstance(); 
 $group_title = $params->get('group_title', false);
 
-$tarifs = modOrtanaHelper::getTarifs( $catId );
-$articles = modOrtanaHelper::getArticles( $catId );
 
-if (false == $catId)
-  jError::raiseWarning(100, 'Veuillez configurer les paramètres du module mod_ortana - @Finel');
+/* jError::raiseWarning(100, 'Veuillez configurer les paramètres du module mod_ortana - @Finel'); */
 
 /* Include native jquery libaries */
 JHtml::_('jquery.framework');
 
 $document = JFactory::getDocument();
-$document->addScriptOptions('mod_ortana', [
-  'OAssets' => JUri::base() . 'modules/mod_ortana/app/assets/',
-  'OCategoryId' => (int)$catId,
-  'OTarifs' => $tarifs,
-  'OArticles' => $articles,
-  'ajax_url' => $currentPageUrl->toString(),
-  'group_title' => $group_title
-]);
 
 /* underscorejs librarie */
 $document->addScript( JUri::base() . 'modules/mod_ortana/app/lib/underscore/underscore-min.js');
