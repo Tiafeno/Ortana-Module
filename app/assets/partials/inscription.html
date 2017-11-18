@@ -1,12 +1,12 @@
 <md-content class="md-padding" layout-xs="column" layout="row">
   <div flex-xs flex-gt-xs="50" layout="column">
 
-    <md-card ng-repeat="article in Articles track by article.ID">
+    <md-card ng-repeat="article in Articles track by article.id">
       <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
       <md-card-title>
         <md-card-title-text>
           <span class="md-headline">{{ article.title }}</span>
-          <span class="md-subhead">{{ article.ID | price }} AR/mois</span>
+          <span class="md-subhead">{{ article.cost }} AR/mois</span>
         </md-card-title-text>
       </md-card-title>
       <md-card-content>
@@ -20,7 +20,7 @@
         </p>
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">
-        <md-button choose-article="{{ article.ID }}">Choose</md-button>
+        <md-button choose-article="{{ article.id }}">Choose</md-button>
       </md-card-actions>
     </md-card>
 

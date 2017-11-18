@@ -17,6 +17,7 @@ $group_title = $params->get('group_title', false);
 
 /* jError::raiseWarning(100, 'Veuillez configurer les paramètres du module mod_ortana - @Finel'); */
 
+JHtml::_('behavior.framework', true);
 /* Include native jquery libaries */
 JHtml::_('jquery.framework');
 

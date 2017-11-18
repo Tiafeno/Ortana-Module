@@ -2,22 +2,17 @@
 <extension type="module" version="3.0" client="site" method="upgrade">
     <name>Ortana subscription</name>
     <author>Tiafeno Finel</author>
-    <version>1.1.6</version>
+    <version>1.2.0</version>
     <description></description>
     <files>
         <filename>mod_ortana.xml</filename>
         <filename module="mod_ortana">mod_ortana.php</filename>
         <filename>index.html</filename>
         <filename>helper.php</filename>
+        <folder>tmpl</folder>
+        <folder>sql</folder>
+        <folder>app</folder>
     </files>
-    <folders>
-      <folder>sql</folder>
-      <folder>app</folder>
-      <folder>app/assets</folder>
-      <folder>app/inc</folder>
-      <folder>app/lib</folder>
-      <folder>tmpl</folder>
-    </folders>
     <install>
       <sql>
         <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>

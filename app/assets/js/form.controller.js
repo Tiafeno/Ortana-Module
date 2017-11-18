@@ -53,7 +53,7 @@ ortanaForm
     self.chooseArticleFn = function( article_id ) {
       if ( ! _.isNumber(article_id) || _.isNaN(article_id) ) return false;
       return selectedArticle = _.find( articles, function( _art ) { 
-        return parseInt(_art.ID) == article_id; 
+        return parseInt(_art.id) == article_id; 
       });
     };
     self.getChoosenArticleFn = function() {
@@ -71,28 +71,18 @@ ortanaForm
     self.setArticlesFn = function( art_ ) { return articles = art_; };
     self.getPriceFn = function( article_id ) {
       this._articles = _.find( articles, function( _art ) { 
-        return parseInt(_art.ID) == article_id; 
+        return parseInt(_art.id) == article_id; 
       });
-      this.field_price = _.find( this._articles.fields, function( _field ) {
-        return  _field.slug == FIELDS.price_slug;
-      });
-      return this.field_price.value;
+      return this._articles.cost;
     };
   }])
-  .controller('OController', ['$scope', 'OFactory', 'OServices', 
+  .controller('ortanaCtrl', ['$scope', 'OFactory', 'OServices', 
     function( $scope, OFactory, OServices ) {
       $scope.Categories = [];
       $scope.Articles = [];
       /* set Articles */
       var articles = [];
-      var group_title = (false == Opt.group_title) ? "Inscription" : Opt.group_title.trim();
-      articles = _.union( Opt.OArticles );
-      _.each(articles, function( article, key ) {
-        var _tar = _.filter(Opt.OTarifs, function( tarif ) { 
-          return tarif.group_title == group_title;
-        });
-        article.fields = _.omit( _tar, function( value, key, obj ) { return key == 'ID'; });
-      });
+      articles = _.union( JSON.parse(Opt.articles) );
       OServices.setArticlesFn( $scope.Articles = articles );
       /* get Categories */
       var OForm = new FormData();
@@ -107,20 +97,14 @@ ortanaForm
             $scope.Categories = request.data;
         });
   }])
-  .filter('price', ['OServices', function( OServices ) {
-    return function( entry ) {
-      var article_id = parseInt( entry );
-      return OServices.getPriceFn( article_id );
-    }
-  }])
   .config(['$routeProvider', function( $routeProvider ) {
     $routeProvider
       .when('/inscription', {
-        templateUrl: Opt.OAssets + 'partials/inscription.html',
+        templateUrl: Opt.assets + 'partials/inscription.html',
         controller: 'InscriptionCtrl'
       })
       .when('/inscription/formulaire', {
-        templateUrl: Opt.OAssets + 'partials/form.html',
+        templateUrl: Opt.assets + 'partials/form.html',
         controller: 'FormCtrl'
       })
       .otherwise({
